@@ -1,0 +1,67 @@
+name: Build and test APK
+
+on:
+  push:
+    branches: ["**"]
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          packages: "platforms;android-34 build-tools;34.0.0 platform-tools"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: "8.7"
+
+      - name: Unit tests (core engine, incl. replay of the Bangalore TCU log)
+        run: gradle --no-daemon testDebugUnitTest
+
+      - name: Build debug APK
+        run: gradle --no-daemon assembleDebug
+
+      - name: Rename APK
+        run: |
+          VERSION=$(grep -oP "versionName '\K[^']+" app/build.gradle)
+          cp app/build/outputs/apk/debug/app-debug.apk "GnssReferenceLogger-${VERSION}-${GITHUB_SHA::7}.apk"
+          echo "APK=GnssReferenceLogger-${VERSION}-${GITHUB_SHA::7}.apk" >> "$GITHUB_ENV"
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: GnssReferenceLogger-apk
+          path: ${{ env.APK }}
+          if-no-files-found: error
+
+      - name: Upload test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unit-test-report
+          path: app/build/reports/tests/testDebugUnitTest
+          if-no-files-found: ignore
+
+      - name: Publish release (on v* tags)
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ env.APK }}
+          generate_release_notes: true

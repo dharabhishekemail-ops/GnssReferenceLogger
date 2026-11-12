@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/navy"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+            <include android:id="@+id/tile1" layout="@layout/tile" />
+            <include android:id="@+id/tile2" layout="@layout/tile" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <include android:id="@+id/tile3" layout="@layout/tile" />
+            <include android:id="@+id/tile4" layout="@layout/tile" />
+        </LinearLayout>
+        <TextView style="@style/SectionTitle" android:text="Step 4: position valid, second by second" />
+        <com.harman.gnssref.ui.views.StatusStripView
+            android:id="@+id/strip"
+            android:layout_width="match_parent"
+            android:layout_height="48dp" />
+        <TextView style="@style/SectionTitle" android:text="Steps 1 to 3 over time" />
+        <com.harman.gnssref.ui.views.TimeSeriesView
+            android:id="@+id/satChart"
+            android:layout_width="match_parent"
+            android:layout_height="220dp" />
+        <TextView style="@style/SectionTitle" android:text="Step 2: signal strength over time" />
+        <com.harman.gnssref.ui.views.TimeSeriesView
+            android:id="@+id/signalChart"
+            android:layout_width="match_parent"
+            android:layout_height="220dp" />
+        <TextView style="@style/SectionTitle" android:text="Step 4: position quality over time" />
+        <com.harman.gnssref.ui.views.TimeSeriesView
+            android:id="@+id/qualityChart"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
+        <TextView style="@style/SectionTitle" android:text="Average satellites per step" />
+        <com.harman.gnssref.ui.views.FunnelView
+            android:id="@+id/funnel"
+            android:layout_width="match_parent"
+            android:layout_height="190dp" />
+        <TextView style="@style/SectionTitle" android:text="Sky views: weakest second and last second" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <com.harman.gnssref.ui.views.SkyView
+                android:id="@+id/skyWeak"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+            <com.harman.gnssref.ui.views.SkyView
+                android:id="@+id/skyLast"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <TextView style="@style/SectionTitle" android:text="Photo of the spot" />
+        <ImageView
+            android:id="@+id/photoView"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            android:visibility="gone" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/share"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Share (zip)" />
+            <Button
+                android:id="@+id/photo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Add photo" />
+            <Button
+                android:id="@+id/newSession"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="New session" />
+        </LinearLayout>
+        <TextView style="@style/SectionTitle" android:text="Summary (also saved as summary.txt)" />
+        <TextView
+            android:id="@+id/summaryText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:textColor="@color/ink"
+            android:textSize="11sp" />
+    </LinearLayout>
+</ScrollView>

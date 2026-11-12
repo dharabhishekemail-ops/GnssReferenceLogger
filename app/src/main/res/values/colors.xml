@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="navy">#0C3362</color>
+    <color name="navy_dark">#07223F</color>
+    <color name="accent">#5598E7</color>
+    <color name="ink">#202020</color>
+    <color name="ink2">#52514E</color>
+    <color name="tint">#EEF2F8</color>
+    <color name="white">#FFFFFF</color>
+</resources>

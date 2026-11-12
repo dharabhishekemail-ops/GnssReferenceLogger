@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Records what a standard Android phone sees from the GNSS satellites, once per second, in the same four steps as the TCU report: tracked, usable, used, position."
+            android:textColor="@color/ink2"
+            android:textSize="14sp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Test label (location / spot)"
+            android:textColor="@color/navy"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="e.g. Gurgaon spot A, dashboard"
+            android:inputType="text"
+            android:maxLines="1" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Duration"
+            android:textColor="@color/navy"
+            android:textStyle="bold" />
+        <Spinner
+            android:id="@+id/duration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <CheckBox
+            android:id="@+id/cold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Try a cold start (ask the phone to clear its satellite data first; works on some phones only, the result is written to the summary)" />
+        <TextView
+            android:id="@+id/checklist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/tile_bg"
+            android:padding="10dp"
+            android:textColor="@color/ink"
+            android:textSize="13sp" />
+        <Button
+            android:id="@+id/start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Start recording" />
+        <Button
+            android:id="@+id/resume"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="A session is running - open live view"
+            android:visibility="gone" />
+        <Button
+            android:id="@+id/previous"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recorded sessions" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Definitions: usable = signal 32 dB-Hz or more and more than 5° above the horizon (Quectel's conditions). Used = taken into the position calculation; 4 are needed. HDOP 2 or less is good."
+            android:textColor="@color/ink2"
+            android:textSize="12sp" />
+    </LinearLayout>
+</ScrollView>
