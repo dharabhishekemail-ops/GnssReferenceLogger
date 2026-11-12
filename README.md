@@ -20,9 +20,11 @@ use identical maths.
 
 Every push builds the app in GitHub Actions:
 
-1. Open **Actions** → latest "Build and test APK" run → **Artifacts** → `GnssReferenceLogger-apk` (zip containing the `.apk`).
-2. For a clean download link for teammates, push a tag (`v0.1.0`, `v0.1.1`, ...): the workflow attaches the APK to a **Release**.
-3. On the phone: allow "install from unknown sources" for the browser/file manager, open the `.apk`, install.
+1. **Releases → "Latest build (main)"** always holds `GnssReferenceLogger-latest.apk`, rebuilt on every push to `main`.
+   Direct link: `https://github.com/dharabhishekemail-ops/GnssReferenceLogger/releases/tag/latest-main`
+2. Every run also keeps the APK as an **Actions artifact** (`GnssReferenceLogger-apk`), and a `v*` tag creates a numbered release.
+3. On the phone: open the link in the browser (GitHub login needed while the repo is private), download the `.apk`,
+   allow "install from unknown sources" for the browser, open the file, install.
 
 The APK is debug-signed, which is fine for internal test phones. Minimum Android 8.0 (API 26).
 

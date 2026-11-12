@@ -42,6 +42,7 @@ jobs:
         run: |
           VERSION=$(grep -oP "versionName '\K[^']+" app/build.gradle)
           cp app/build/outputs/apk/debug/app-debug.apk "GnssReferenceLogger-${VERSION}-${GITHUB_SHA::7}.apk"
+          cp app/build/outputs/apk/debug/app-debug.apk "GnssReferenceLogger-latest.apk"
           echo "APK=GnssReferenceLogger-${VERSION}-${GITHUB_SHA::7}.apk" >> "$GITHUB_ENV"
 
       - name: Upload APK artifact
@@ -58,6 +59,18 @@ jobs:
           name: unit-test-report
           path: app/build/reports/tests/testDebugUnitTest
           if-no-files-found: ignore
+
+      - name: Publish rolling pre-release with the latest APK (every push to main)
+        if: github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest-main
+          name: Latest build (main)
+          prerelease: true
+          body: "Rolling pre-release. GnssReferenceLogger-latest.apk is the debug APK built from the newest commit on main (${{ github.sha }}). Install on Android 8.0 or newer."
+          files: |
+            GnssReferenceLogger-latest.apk
+            ${{ env.APK }}
 
       - name: Publish release (on v* tags)
         if: startsWith(github.ref, 'refs/tags/v')
